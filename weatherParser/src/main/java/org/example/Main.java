@@ -1,15 +1,16 @@
 package org.example;
 
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-
 import java.io.IOException;
+
+import static org.example.Parser.Parse;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Document page = Parser.getPage();
-        Element weatherClass = page.select("div[data-widget=weather-parameters]").first();
-        String date = "";
-        System.out.println("Сегодня, " + date + ". Температура воздуха составит " );
+        String date = Parse("div[class=date]").text();
+        String maxTempString = Parse("div[class=maxt]").toString();
+        String maxTemp = ResHandler.handler("value=\"(\\d+)\"", maxTempString);
+        String minTempString = Parse("div[class=mint]").toString();
+        String minTemp = ResHandler.handler("value=\"(\\d+)\"", minTempString);
+        System.out.println("Сегодня, " + date + ", Температура воздуха составит от " + minTemp + " до " + maxTemp + " градудсов" );
     }
 }
