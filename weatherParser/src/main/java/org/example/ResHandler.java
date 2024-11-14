@@ -8,7 +8,7 @@ public class ResHandler {
         Pattern pattern = Pattern.compile(compile);
         Matcher mather = pattern.matcher(obj);
         if (mather.find()){
-            return mather.group(1);
+            return mather.group();
         }
         return "Can't match the temp";
     }

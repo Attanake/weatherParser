@@ -8,14 +8,14 @@ import java.io.IOException;
 import java.net.URL;
 
 public class Parser {
-    private static Document getPage() throws IOException {
-        String url = "https://www.gismeteo.by/weather-pinsk-4914/10-days/";
+    private static Document getPage(String urlPar) throws IOException {
+        String url = urlPar;
         Document page = Jsoup.parse(new URL(url),2000);
         return page;
     }
 
-    public static Element Parse(String el) throws IOException{
-        Document page = Parser.getPage();
+    public static Element Parse(String el, String urlPar) throws IOException{
+        Document page = Parser.getPage(urlPar);
         return page.select(el).first();
     }
 }
