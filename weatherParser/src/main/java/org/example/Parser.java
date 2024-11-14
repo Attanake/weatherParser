@@ -9,9 +9,7 @@ import java.net.URL;
 
 public class Parser {
     private static Document getPage(String urlPar) throws IOException {
-        String url = urlPar;
-        Document page = Jsoup.parse(new URL(url),2000);
-        return page;
+        return Jsoup.parse(new URL(urlPar),20000);
     }
 
     public static Element Parse(String el, String urlPar) throws IOException{
