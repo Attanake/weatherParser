@@ -18,6 +18,8 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException{
+        DataBaseConnection db = new DataBaseConnection();
+        db.DBConnect("WeatherDB","postgres");
         Main.StartParse(url1);
     }
 

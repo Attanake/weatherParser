@@ -11,7 +11,7 @@ public class DataBaseConnection {
             Class.forName("org.postgresql.Driver");
             System.out.println("Enter the password for DataBase connection");
             Scanner scanner = new Scanner(System.in);
-            conn = DriverManager.getConnection("jdbc::postgresql://localhost:5432/"+DBName, UserName, scanner.nextLine());
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/"+DBName, UserName, scanner.nextLine());
 
             if(conn != null){
                 System.out.println("Connected");
@@ -21,7 +21,6 @@ public class DataBaseConnection {
         }catch (Exception e){
             System.out.println(e);
         }
-
         return conn;
     }
 }
