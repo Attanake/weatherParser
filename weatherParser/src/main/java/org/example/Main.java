@@ -31,14 +31,18 @@ public class Main {
         db.DBConnect("WeatherDB","postgres");
         Document page = Parser.getPage(url1);
         Main.StartParse(page);
-        Main.QueryExecutor(db);;
+        Main.QueryExecutor(db);
     }
 
-    private static void StartParse(Document page) throws IOException {
-        days = Parse("div[class=date]", page);
-        table = Parse("div[class=values]",page).first();
-        maxTemp = Parse("div[class=maxt]", table);
-        minTemp = Parse("div[class=mint]", table);
+    private static void StartParse(Document page){
+        try {
+            Parse("div[class=date]", page);
+            table = Parse("div[class=values]", page).first();
+            maxTemp = Parse("div[class=maxt]", table);
+            minTemp = Parse("div[class=mint]", table);
+        }catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private static void QueryExecutor(DataBaseConnection db) {
@@ -53,8 +57,8 @@ public class Main {
             System.out.println(minTempValue);
             java.time.LocalDate currentDate = java.time.LocalDate.now();
             if (days.indexOf(day) == 0) {
-                PreparedStatement preparedStatement = db.QueryTemperature();
                 try {
+                    PreparedStatement preparedStatement = db.QueryTemperature();
                     preparedStatement.setDate(1, java.sql.Date.valueOf(currentDate));
                     preparedStatement.setInt(2, maxTempValue);
                     preparedStatement.setInt(3, minTempValue);
@@ -65,8 +69,8 @@ public class Main {
                 }
 
             }else{
-                PreparedStatement preparedStatement = db.QueryExpectedTemperature();
                 try {
+                    PreparedStatement preparedStatement = db.QueryExpectedTemperature();
                     preparedStatement.setDate(1, ResHandler.DateHandler(dayString));
                     preparedStatement.setInt(2, maxTempValue);
                     preparedStatement.setInt(3, minTempValue);
