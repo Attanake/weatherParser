@@ -9,6 +9,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 import static org.example.Parser.Parse;
 
@@ -31,7 +32,12 @@ public class Main {
         db.DBConnect("WeatherDB","postgres");
         Document page = Parser.getPage(url1);
         Main.StartParse(page);
-        Main.QueryExecutor(db);
+        System.out.println("Do you want to add today's data to the DataBase? 0/1");
+        Scanner scanner = new Scanner(System.in);
+        int answ = scanner.nextInt();
+        if(answ == 1){
+            Main.QueryExecutor(db);
+        }else System.exit(0);
     }
 
     private static void StartParse(Document page){
@@ -52,9 +58,6 @@ public class Main {
             int maxTempValue = Integer.parseInt(ResHandler.handler("[+-]?\\d+|[−]\\d+", maxTempString));
             String minTempString = minTemp.get(days.indexOf(day)).toString();
             int minTempValue = Integer.parseInt(ResHandler.handler("[+-]?\\d+|[−]\\d+", minTempString));
-            System.out.println(dayString);
-            System.out.println(maxTempValue);
-            System.out.println(minTempValue);
             java.time.LocalDate currentDate = java.time.LocalDate.now();
             if (days.indexOf(day) == 0) {
                 try {
@@ -63,7 +66,7 @@ public class Main {
                     preparedStatement.setInt(2, maxTempValue);
                     preparedStatement.setInt(3, minTempValue);
                     int rows = preparedStatement.executeUpdate();
-                    System.out.println("added " + rows + "rows");
+                    System.out.println("added " + rows + "rows:" + currentDate + " " + maxTempValue + " " + minTempValue);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
@@ -76,7 +79,7 @@ public class Main {
                     preparedStatement.setInt(3, minTempValue);
                     preparedStatement.setDate(4, java.sql.Date.valueOf(currentDate));
                     int rows = preparedStatement.executeUpdate();
-                    System.out.println("added " + rows + "rows");
+                    System.out.println("added " + rows + "rows" + currentDate + " " + maxTempValue + " " + minTempValue);
                 }catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
