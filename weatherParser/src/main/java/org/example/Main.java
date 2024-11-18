@@ -36,7 +36,7 @@ public class Main {
 
     private static void StartParse(Document page){
         try {
-            Parse("div[class=date]", page);
+            days = Parse("div[class=date]", page);
             table = Parse("div[class=values]", page).first();
             maxTemp = Parse("div[class=maxt]", table);
             minTemp = Parse("div[class=mint]", table);
