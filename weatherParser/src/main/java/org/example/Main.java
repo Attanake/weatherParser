@@ -27,7 +27,7 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException{
-        DataBaseConnection db = new DataBaseConnection();
+        DataBase db = new DataBase();
         db.DBConnect("WeatherDB","postgres");
         Document page = Parser.getPage(url1);
         Main.StartParse(page);
@@ -45,7 +45,7 @@ public class Main {
         }
     }
 
-    private static void QueryExecutor(DataBaseConnection db) {
+    private static void QueryExecutor(DataBase db) {
         for (Element day : days) {
             String dayString = day.text();
             String maxTempString = maxTemp.get(days.indexOf(day)).toString();

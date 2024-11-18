@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class DataBaseConnection {
+public class DataBase {
     Connection conn = null;
     public Connection DBConnect(String DBName, String UserName){
         try{
@@ -20,8 +20,8 @@ public class DataBaseConnection {
             }else{
                 System.out.println("Not connected");
             }
-        }catch (Exception e){
-            System.out.println(e);
+        }catch (Exception exception){
+            System.out.println(exception);
         }
         return conn;
     }
