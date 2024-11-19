@@ -42,4 +42,22 @@ public class DataBase {
             throw new RuntimeException(e);
         }
     }
+
+    public PreparedStatement QueryShowTemperature(){
+        try {
+            String query = "SELECT \n" +
+                    "    t.date,\n" +
+                    "    t.max_temp,\n" +
+                    "    t.min_temp,\n" +
+                    "    e.max_expected_temp,\n" +
+                    "    e.min_expected_temp\n" +
+                    "FROM \n" +
+                    "    temperature t\n" +
+                    "JOIN \n" +
+                    "    expected_temperature e ON t.date = e.date;";
+            return conn.prepareStatement(query);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

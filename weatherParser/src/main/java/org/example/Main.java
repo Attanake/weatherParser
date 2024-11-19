@@ -10,7 +10,6 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
-
 import static org.example.Parser.Parse;
 
 public class Main {
@@ -66,7 +65,7 @@ public class Main {
                     preparedStatement.setInt(2, maxTempValue);
                     preparedStatement.setInt(3, minTempValue);
                     int rows = preparedStatement.executeUpdate();
-                    System.out.println("added " + rows + "rows:" + currentDate + " " + maxTempValue + " " + minTempValue);
+                    System.out.println("added " + rows + " rows: " + currentDate + " " + maxTempValue + " " + minTempValue);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
