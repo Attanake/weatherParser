@@ -54,7 +54,8 @@ public class DataBase {
                     "FROM \n" +
                     "    temperature t\n" +
                     "JOIN \n" +
-                    "    expected_temperature e ON t.date = e.date;";
+                    "    expected_temperature e ON t.date = e.date\n" +
+                    "WHERE e.parse_date = ?";
             return conn.prepareStatement(query);
         } catch (SQLException e) {
             throw new RuntimeException(e);

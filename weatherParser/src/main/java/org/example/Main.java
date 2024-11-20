@@ -37,6 +37,7 @@ public class Main {
         if(answ == 1){
             Main.QueryExecutor(db);
         }else System.exit(0);
+        ChartGenerator.ShowTheChart(db, java.time.LocalDate.of(2024,11,16));
     }
 
     private static void StartParse(Document page){
@@ -78,7 +79,7 @@ public class Main {
                     preparedStatement.setInt(3, minTempValue);
                     preparedStatement.setDate(4, java.sql.Date.valueOf(currentDate));
                     int rows = preparedStatement.executeUpdate();
-                    System.out.println("added " + rows + "rows" + currentDate + " " + maxTempValue + " " + minTempValue);
+                    System.out.println("added " + rows + " rows: " + currentDate + " " + maxTempValue + " " + minTempValue);
                 }catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
