@@ -26,10 +26,12 @@ public class ChartGenerator extends Application{
         final LineChart<Number,Number> lineChart =
                 new LineChart<Number,Number>(xAxis,yAxis);
 
+        //DataBase db = new DataBase();
+        //db.DBConnect("WeatherDB","postgres");
+        //ShowTheChart(db, java.time.LocalDate.of(2024,11,16));
+
         lineChart.setTitle("Expected and real temperature Monitoring");
-        DataBase db = new DataBase();
-        db.DBConnect("WeatherDB","postgres");
-        ShowTheChart(db, java.time.LocalDate.of(2024,11,16));
+
         Scene scene  = new Scene(lineChart,950,500);
         lineChart.getData().add(realTempSerie);
         lineChart.getData().add(explTempSerie);
@@ -56,15 +58,12 @@ public class ChartGenerator extends Application{
                 int intDate = Integer.parseInt(resDate.toString().substring(8,10));
                 realTempSerie.getData().add(new XYChart.Data(intDate,avgTemp));
                 explTempSerie.getData().add(new XYChart.Data(intDate,avgExpTemp));
-                //realTempSerie.getData().add(new XYChart.Data(1, 2));
-                //realTempSerie.getData().add(new XYChart.Data(1,100));
             }
         }catch (SQLException exception){
             System.out.println(exception);
         }
     }
-
-    public static void main() {
+    public static void Main(){
         launch();
     }
 }

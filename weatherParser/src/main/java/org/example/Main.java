@@ -36,8 +36,9 @@ public class Main {
         int answ = scanner.nextInt();
         if(answ == 1){
             Main.QueryExecutor(db);
-        }else System.exit(0);
-        ChartGenerator.ShowTheChart(db, java.time.LocalDate.of(2024,11,16));
+        }
+        ChartGenerator.ShowTheChart(db,java.time.LocalDate.of(2024,11,16));
+        ChartGenerator.Main();
     }
 
     private static void StartParse(Document page){
