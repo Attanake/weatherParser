@@ -10,7 +10,6 @@ import javafx.stage.Stage;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
-import java.util.Date;
 
 
 public class ChartGenerator extends Application{
@@ -24,11 +23,7 @@ public class ChartGenerator extends Application{
         xAxis.setLabel("Date");
         yAxis.setLabel("Temperature");
         final LineChart<Number,Number> lineChart =
-                new LineChart<Number,Number>(xAxis,yAxis);
-
-        //DataBase db = new DataBase();
-        //db.DBConnect("WeatherDB","postgres");
-        //ShowTheChart(db, java.time.LocalDate.of(2024,11,16));
+                new LineChart<>(xAxis, yAxis);
 
         lineChart.setTitle("Expected and real temperature Monitoring");
 
