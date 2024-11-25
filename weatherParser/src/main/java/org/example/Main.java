@@ -45,8 +45,14 @@ public class Main {
         try {
             days = Parse("div[class=date]", page);
             table = Parse("div[class=values]", page).first();
-            maxTemp = Parse("div[class=maxt]", table);
-            minTemp = Parse("div[class=mint]", table);
+            if(table != null){
+                maxTemp = Parse("div[class=maxt]", table);
+                minTemp = Parse("div[class=mint]", table);
+            }else{
+                System.out.println("The \"Table\" cannot be parsed");
+                System.exit(1);
+            }
+
         }catch (Exception e) {
             throw new RuntimeException(e);
         }

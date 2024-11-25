@@ -7,11 +7,13 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 
-
+@SuppressWarnings("all")
 public class ChartGenerator extends Application{
 
     static XYChart.Series realTempSerie = new XYChart.Series();
@@ -36,11 +38,11 @@ public class ChartGenerator extends Application{
         stage.show();
     }
 
-    public static void ShowTheChart(DataBase db,java.time.LocalDate date){
+    public static void ShowTheChart(DataBase db, LocalDate date){
         PreparedStatement preparedStatement = db.QueryShowTemperature();
         ResultSet resultSet;
         try {
-            preparedStatement.setDate(1, java.sql.Date.valueOf(date));
+            preparedStatement.setDate(1, Date.valueOf(date));
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 java.util.Date resDate = resultSet.getDate("date");
